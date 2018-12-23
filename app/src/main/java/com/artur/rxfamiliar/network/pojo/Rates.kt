@@ -1,5 +1,6 @@
 package com.artur.rxfamiliar.network.pojo
 
+import com.artur.rxfamiliar.network.response.BaseResponse
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -20,4 +21,4 @@ data class Rates(
         @Expose @SerializedName("BGN") val BGN: Float, @Expose @SerializedName("IDR") val IDR: Float,
         @Expose @SerializedName("ISK") val ISK: Float, @Expose @SerializedName("USD") val USD: Float,
         @Expose @SerializedName("SEK") val SEK: Float, @Expose @SerializedName("ZAR") val ZAR: Float
-)
+): BaseResponse()

@@ -2,10 +2,8 @@ package com.artur.rxfamiliar
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.artur.rxfamiliar.network.pojo.ExchangeLatest
-import retrofit2.Call
-import retrofit2.Callback
+import com.artur.rxfamiliar.network.response.ApiCallResponse
 import retrofit2.Response
 
 class MainActivity: AppCompatActivity() {
@@ -18,19 +16,17 @@ class MainActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val call = CustomApplication.instance.getApi().getLatestExchange()
-        call.enqueue(object : Callback<ExchangeLatest> {
-            override fun onFailure(call: Call<ExchangeLatest>, t: Throwable) {
-                Log.v(TAG, "Failure:")
-            }
+        CustomApplication.instance
+                .getApi()
+                .getLatestExchange()
+                .enqueue(object : ApiCallResponse<ExchangeLatest>() {
+                    override fun onSuccess(response: Response<ExchangeLatest>) {
 
-            override fun onResponse(call: Call<ExchangeLatest>, response: Response<ExchangeLatest>) {
-                if (response.isSuccessful) {
-                    Log.v(TAG, "Success")
-                } else {
-                    Log.v(TAG, "Unsuccess")
-                }
-            }
-        })
+                    }
+
+                    override fun onError(t: Throwable) {
+
+                    }
+                })
     }
 }
